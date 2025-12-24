@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: AssetIQ
+
+#   # Java 21 Virtual Threads
+#   # threads:
+#   #   virtual:
+#   #     enabled: true
+
+#   # Database and Cache
+#   # data:
+#   #   mongodb:
+#   #     uri: mongodb://root:secret@mongodb:27017/mydatabase?authSource=admin
+#   #   redis:
+#   #     host: redis
+#     # port: 6379
+
+#   # Disable SQL auto-config
+#   # autoconfigure:
+#   #   exclude:
+#     #     - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+#     #     - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+
+server:
+  port: 8081

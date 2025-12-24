@@ -1,0 +1,19 @@
+# Development Dockerfile with Hot Reload
+FROM eclipse-temurin:21-jdk
+WORKDIR /app
+
+# Copy maven wrapper and pom first for better caching
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+
+# Make mvnw executable and download dependencies
+RUN chmod +x ./mvnw && ./mvnw dependency:go-offline
+
+# Copy source code
+COPY src ./src
+
+EXPOSE 8080 35729
+
+# Run with spring-boot:run which watches for source changes and recompiles
+ENTRYPOINT ["./mvnw", "spring-boot:run"]
+
