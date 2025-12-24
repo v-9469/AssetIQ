@@ -2,24 +2,28 @@ spring:
   application:
     name: AssetIQ
 
-#   # Java 21 Virtual Threads
-#   # threads:
-#   #   virtual:
-#   #     enabled: true
+  # DevTools for hot reload (works in Docker with volume mounts)
+  devtools:
+    restart:
+      enabled: true
+      poll-interval: 2s
+      quiet-period: 1s
+    livereload:
+      enabled: true
 
-#   # Database and Cache
-#   # data:
-#   #   mongodb:
-#   #     uri: mongodb://root:secret@mongodb:27017/mydatabase?authSource=admin
-#   #   redis:
-#   #     host: redis
-#     # port: 6379
+  # Java 21 Virtual Threads (enabled via docker-compose env var for Docker)
+  # threads:
+  #   virtual:
+  #     enabled: true
 
-#   # Disable SQL auto-config
-#   # autoconfigure:
-#   #   exclude:
-#     #     - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-#     #     - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+  # Database and Cache (configured via docker-compose env vars for Docker)
+  # Uncomment below for local development without Docker:
+  # data:
+  #   mongodb:
+  #     uri: mongodb://root:secret@localhost:27017/mydatabase?authSource=admin
+  #   redis:
+  #     host: localhost
+  #     port: 6379
 
 server:
-  port: 8081
+  port: 8080

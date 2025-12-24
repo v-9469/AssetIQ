@@ -6,8 +6,14 @@ WORKDIR /app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 
-# Make mvnw executable and download dependencies
-RUN chmod +x ./mvnw && ./mvnw dependency:go-offline
+# Make mvnw executable, fix line endings, and download dependencies
+RUN apt-get update && apt-get install -y dos2unix && \
+    dos2unix ./mvnw && \
+    chmod +x ./mvnw && \
+    ./mvnw dependency:go-offline && \
+    apt-get remove -y dos2unix && \
+    apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
 
 # Copy source code
 COPY src ./src

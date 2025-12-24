@@ -5,6 +5,15 @@ WORKDIR /app
 # Copy maven executable and pom first for better caching
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
+
+# Fix line endings and make mvnw executable, then download dependencies
+RUN apt-get update && apt-get install -y dos2unix && \
+    dos2unix ./mvnw && \
+    chmod +x ./mvnw && \
+    apt-get remove -y dos2unix && \
+    apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
+
 RUN ./mvnw dependency:go-offline
 
 # Copy source and build
