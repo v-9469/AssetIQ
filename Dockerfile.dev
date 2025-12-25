@@ -3,14 +3,14 @@ FROM eclipse-temurin:21-jdk
 WORKDIR /app
 
 # Copy maven wrapper and pom first for better caching
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
+COPY .mvn/ .mvn/
+COPY mvnw mvnw.cmd pom.xml ./
 
 # Make mvnw executable, fix line endings, and download dependencies
 RUN apt-get update && apt-get install -y dos2unix && \
     dos2unix ./mvnw && \
     chmod +x ./mvnw && \
-    ./mvnw dependency:go-offline && \
+    ./mvnw dependency:go-offline -B && \
     apt-get remove -y dos2unix && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
