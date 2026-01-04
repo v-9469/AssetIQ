@@ -10,10 +10,11 @@ COPY mvnw mvnw.cmd pom.xml ./
 RUN apt-get update && apt-get install -y dos2unix && \
     dos2unix ./mvnw && \
     chmod +x ./mvnw && \
-    ./mvnw dependency:go-offline -B && \
     apt-get remove -y dos2unix && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
+
+RUN ./mvnw dependency:go-offline -B
 
 # Copy source code
 COPY src ./src
